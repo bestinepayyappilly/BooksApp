@@ -1,5 +1,12 @@
 import React, {useContext, useEffect, useState, useCallback} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  ToastAndroid,
+} from 'react-native';
 import {BookContext} from '../App';
 import {Image} from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -10,7 +17,7 @@ const Cart = ({navigation}) => {
   const user = auth().currentUser;
   const {items, setItems} = useContext(BookContext);
   const [total, setTotal] = useState(0);
-  const [book, setBook] = useState({});
+  const [Book, setBook] = useState({});
 
   useEffect(() => {
     setCart(items);
@@ -20,12 +27,11 @@ const Cart = ({navigation}) => {
         const reducer = (accumulator, curr) => accumulator + curr;
         let totalCost = cost.reduce(reducer);
         setTotal(totalCost);
+        setBook(items.map(e => [{id: e.id, title: e.title}]));
       }
       null;
     }
     console.log(items);
-
-    setBook(items.map(e => [{id: e.item.id, title: e.item.volumeInfo.title}]));
   }, [items]);
 
   const [cart, setCart] = useState([]);
@@ -175,13 +181,16 @@ const Cart = ({navigation}) => {
               const article = {
                 name: user.displayName,
                 total: total,
-                books: book,
+                books: Book,
               };
-              // const response = await axios.post(
-              //   ' https://api.tago.care/assignment/',
-              //   article,
-              // );
-              console.log(article);
+              const response = await axios
+                .post(' https://api.tago.care/assignment/', article)
+                .catch(e => alert(e));
+              ToastAndroid.show(
+                'The Books have been successfully Ordered!!',
+                ToastAndroid.SHORT,
+              );
+              console.log(response);
             }}
             style={{
               height: 56,
