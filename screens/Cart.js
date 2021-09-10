@@ -189,8 +189,8 @@ const Cart = ({navigation}) => {
               ToastAndroid.show(
                 'The Books have been successfully Ordered!!',
                 ToastAndroid.SHORT,
-              ),
-                console.log(response);
+              );
+              console.log(response);
             }}
             style={{
               height: 56,
