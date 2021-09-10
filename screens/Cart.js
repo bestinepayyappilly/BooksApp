@@ -17,7 +17,7 @@ const Cart = ({navigation}) => {
   const user = auth().currentUser;
   const {items, setItems} = useContext(BookContext);
   const [total, setTotal] = useState(0);
-  const [book, setBook] = useState({});
+  const [Book, setBook] = useState({});
 
   useEffect(() => {
     setCart(items);
@@ -181,7 +181,7 @@ const Cart = ({navigation}) => {
               const article = {
                 name: user.displayName,
                 total: total,
-                books: book,
+                books: Book,
               };
               const response = await axios
                 .post(' https://api.tago.care/assignment/', article)
