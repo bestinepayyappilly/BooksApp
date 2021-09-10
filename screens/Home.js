@@ -15,6 +15,7 @@ import {Image} from 'react-native-elements';
 
 import {BookContext} from '../App';
 
+//google-books-api
 const Url =
   'https://www.googleapis.com/books/v1/volumes?q=harry+potter&maxResults=20';
 
@@ -68,6 +69,7 @@ const Home = ({navigation}) => {
   const {items, setItems} = useContext(BookContext);
 
   useEffect(async () => {
+    //getting-books-from-api
     await axios
       .get(Url)
       .then(response => {
@@ -76,6 +78,7 @@ const Home = ({navigation}) => {
       .catch(e => alert(e));
   }, []);
 
+  //flatList-renderItem
   const _renderItem = ({item}) => {
     return (
       <View
@@ -96,8 +99,10 @@ const Home = ({navigation}) => {
               alignItems: 'center',
             }}>
             <Image
-              resizeMode="cover"
-              source={{uri: item.volumeInfo.imageLinks.thumbnail}}
+              resizeMode="contain"
+              source={{
+                uri: item.volumeInfo.imageLinks.thumbnail,
+              }}
               style={{height: 200, width: 150}}
             />
             <View style={{width: '100%'}}>
@@ -142,7 +147,7 @@ const Home = ({navigation}) => {
           <Ionicons
             name="add"
             size={40}
-            color={items.every(e => e.id !== item.id) ? 'orange' : '#000'}
+            color={items.every(e => e.id !== item.id) ? '#000' : 'orange'}
           />
         </TouchableOpacity>
       </View>
@@ -168,6 +173,7 @@ const Home = ({navigation}) => {
       </View>
     );
   }
+  //if-api-is-not-received-yet
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <ActivityIndicator size={35} color="orange" />

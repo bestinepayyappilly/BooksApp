@@ -3,7 +3,9 @@ import Authentication from './screens/Authentication';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Authenticated from './screens/Authenticated';
+import {ToastAndroid} from 'react-native';
 
+//state-management-goals :)
 export const BookContext = createContext();
 
 export default function App() {
@@ -19,15 +21,23 @@ export default function App() {
     });
   }, []);
 
+  //calling-google-signIn-api
   const onGoogleButtonPress = async () => {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
+    try {
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      // Sign-in the user with the credential
+      return auth().signInWithCredential(googleCredential);
+    } catch {
+      error => {
+        alert(error);
+      };
+    }
   };
 
+  //checking-if-user-signed-in-or-signed-out
   auth().onAuthStateChanged(user => {
     if (user) {
       setAuthenticated(true);
@@ -38,7 +48,8 @@ export default function App() {
 
   if (authenticated) {
     return (
-      <BookContext.Provider value={{items, setItems, selected, setSelected}}>
+      <BookContext.Provider value={{items, setItems}}>
+        {ToastAndroid.show('Logged In!', ToastAndroid.SHORT)}
         <Authenticated />
       </BookContext.Provider>
     );
