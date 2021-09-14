@@ -28,14 +28,14 @@ Run The App
      <td>Cart Page</td>
   </tr>
   <tr>
-    <td valign="top"><img src="ScreenShots/Screenshot_1631231962.png" width=180 height=360></td>
-    <td valign="top"><img src="ScreenShots/Screenshot_1631231953.png" width=180 height=360></td>
-    <td valign="top"><img src="ScreenShots/Screenshot_1631231966.png" width=180 height=360></td>
+    <td valign="top"><img src="ScreenShots/Screenshot_1631231962.png"  ></td>
+    <td valign="top"><img src="ScreenShots/Screenshot_1631231953.png" ></td>
+    <td valign="top"><img src="ScreenShots/Screenshot_1631231966.png"></td>
   </tr>
  </table>
  
  
- - This project includes the use of different React Hooks, namely : useState,useEffect,useContext.
+ - This project includes the use of React-Navigation & different React Hooks, namely : useState,useEffect,useContext.
  - Icons are derived from the Ionicons pack from the react-native-vector-icons library : https://www.npmjs.com/package/react-native-vector-icons.
  - firebase/app and firebase/auth are used in the project.
  
