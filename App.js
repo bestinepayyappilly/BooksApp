@@ -3,7 +3,7 @@ import Authentication from './screens/Authentication';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Authenticated from './screens/Authenticated';
-import {ToastAndroid} from 'react-native';
+import {ToastAndroid, View} from 'react-native';
 
 //state-management-goals :)
 export const BookContext = createContext();
